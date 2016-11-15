@@ -1,0 +1,40 @@
+{
+  "name": "ff-test",
+  "version": "1.0.0",
+  "description": "FF Map Test",
+  "main": "server.js",
+  "scripts": {
+    "start": "node bin/www.js",
+    "dev": "brunch watch --server",
+    "test": "brunch test"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "chaplin": "~1.1.0",
+    "console-polyfill": "~0.1.0",
+    "exoskeleton": "~0.6.0",
+    "jquery": "~2.2.0",
+    "lodash": "~2.2.0",
+    "normalize.css": "~3.0.3"
+  },
+  "devDependencies": {
+    "javascript-brunch": "~2.0.0",
+    "css-brunch": "~2.0.0",
+    "stylus-brunch": "~2.0.0",
+    "handlebars-brunch": "~2.0.0",
+    "uglify-js-brunch": "~2.0.0",
+    "clean-css-brunch": "~2.0.0",
+    "auto-reload-brunch": "~2.0.0",
+    "brunch": "~2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snesi/ff-test.git"
+  },
+  "author": "David G. Shannon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Snesi/ff-test/issues"
+  },
+  "homepage": "https://github.com/Snesi/ff-test#readme"
+}
