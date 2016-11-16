@@ -11,11 +11,22 @@
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <style>
-       #map {
-        height: 400px;
-        width: 100%;
-       }
-    </style>
+     #map {
+      height: 400px;
+      width: 100%;
+     }
+     #markers {
+       list-style: none;
+       max-width: 30%;
+       margin: 0;
+     }
+     #lat, #lon {
+       max-width: 100px;
+     }
+     #markers li {
+       margin: 5px 0;
+     }
+  </style>
 </head>
 
 <body>
@@ -65,8 +76,8 @@
     
     function listPosts(posts) {
       var liMap = posts.map(function(post, index) {
-        return "<li class='row'><p class='col-md-6'>"+post.title+
-        "</p><button class='btn btn-danger' onclick='return removePost("+index+");'></button></li>";
+        return "<li class='row'><span class='pull-left'>"+post.title+
+        "</span><button class='btn btn-danger pull-right' onclick='return removePost("+index+");'>Delete</button></li>";
       })
       
       $("#markers").html(liMap.join(""));
