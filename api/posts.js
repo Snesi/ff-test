@@ -8,7 +8,10 @@ router.route("/posts").get(function(req, res){
 })
 
 router.route("/posts").post(function(req, res){
-    db.posts.push(req.body)
+    var body = req.body
+    body.lat = parseFloat(body.lat)
+    body.long = parseFloat(body.long)
+    db.posts.push(body)
     res.json({"message": "Post successfully created"})
 })
 
