@@ -22,7 +22,7 @@
   <div class="container">
     <h1>Welcome To FF Map Test</h1>
     <p>To add markers to the map, simply add the markers coordinates.</p>
-    <div id="posts">
+    <div id="posts" class="row">
       <form action="#" class="form-inline">
         <div class="form-group">
           <input type="name" class="form-control" id="name" placeholder="Marker Name">
@@ -33,24 +33,45 @@
         <div class="form-group">
           <input type="text" class="form-control" id="lon" placeholder="Longitude">
         </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="image_url" placeholder="Image Url">
+        </div>
         <button type="submit" class="btn btn-success">Add</button>
       </form>
+    </div>
+    <div class="row">
       <ul id="markers">
-        
       </ul>
     </div>
-    <div id="map"></div>  
+    <div id="map" class="row"></div>  
     </div>
   
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script>
     
-    function togglePhoto(imgUrl) {
-      return function() {
-        alert(imgUrl);
+    function togglePhoto(post, map, marker) {
+      var infowindow = new google.maps.InfoWindow({
+        content: "<img src='"+post.image_url+"'>"
+      });
+      return function(e) {
+        infowindow.open(map, marker);
       }
     }
-  
+    
+    function renderAll() {
+      clearForm();
+      initMap();
+    }
+    
+    function listPosts(posts) {
+      var liMap = posts.map(function(post, index) {
+        return "<li class='row'><p class='col-md-6'>"+post.title+
+        "</p><button class='btn btn-danger' onclick='return removePost("+index+");'></button></li>";
+      })
+      
+      $("#markers").html(liMap.join(""));
+    }
+    
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 1,
@@ -58,27 +79,43 @@
       });
       var markers = [];
       $.getJSON("/api/posts", function(res) {
+        listPosts(res);
         markers = res.map(function(post) {
           var marker = new google.maps.Marker({
             position: { lat: post.lat, lng: post.long },
             title: post.title,
             map: map
           });
-          marker.addListener('click', togglePhoto(post.image_url));
+          marker.addListener('click', togglePhoto(post, map, marker));
           return marker;
         });
       })
     }
     
+    function removePost(id) {
+      $.ajax({
+        "url": "/api/posts/"+id,
+        "type": "DELETE"
+      }).done(function() {
+        renderAll();
+      })
+    }
+    
+    
+    
+    function clearForm() {
+      $("input").val("");
+    }
     $("form").submit(function(e) {
       e.preventDefault();
       var data = {
         "lat": $("#lat").val(),
         "long": $("#lon").val(),
-        "title": $("#name").val()
+        "title": $("#name").val(),
+        "image_url": $("#image_url").val()
       };
       $.post("/api/posts", data, function(res) {
-        initMap();
+        renderAll();
       });
     });
   </script>

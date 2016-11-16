@@ -27,6 +27,7 @@ router.route("/posts/:id").put(function(req, res){
     for (var prop in req.body) {
         post[prop] = req.body[prop];
     }
+    res.send("Updated!")
 })
 
 router.route("/posts/:id").delete(function(req, res){
@@ -34,6 +35,7 @@ router.route("/posts/:id").delete(function(req, res){
     if (!post) return res.json({"error": "Post doesn't exist"}, 404)
     db.deletedPosts.push(post)
     db.posts.splice(req.params.id, 1)
+    res.send("Deleted!")
 })
 
 module.exports = router
