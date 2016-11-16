@@ -5,27 +5,17 @@
   "main": "server.js",
   "scripts": {
     "start": "node bin/www.js",
-    "dev": "brunch watch --server",
-    "test": "brunch test"
+    "watch": "gulp watch"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "chaplin": "~1.1.0",
-    "console-polyfill": "~0.1.0",
-    "exoskeleton": "~0.6.0",
+    "express": "^4.14.0",
     "jquery": "~2.2.0",
     "lodash": "~2.2.0",
-    "normalize.css": "~3.0.3"
+    "morgan": "^1.7.0"
   },
   "devDependencies": {
-    "javascript-brunch": "~2.0.0",
-    "css-brunch": "~2.0.0",
-    "stylus-brunch": "~2.0.0",
-    "handlebars-brunch": "~2.0.0",
-    "uglify-js-brunch": "~2.0.0",
-    "clean-css-brunch": "~2.0.0",
-    "auto-reload-brunch": "~2.0.0",
-    "brunch": "~2.3.0"
+    
   },
   "repository": {
     "type": "git",
